@@ -9,7 +9,7 @@ app.directive('ngSocialTwitter', function() {
             }
         },
         popup: {
-            url: 'http://twitter.com/intent/tweet?url={url}&text={title}',
+            url: 'http://twitter.com/intent/tweet?url={url}&text={title}&via={via}&hashtags={hashtags}',
             width: 600,
             height: 450
         },
@@ -44,6 +44,11 @@ app.directive('ngSocialTwitter', function() {
                 return;
             }
             scope.options = options;
+            // https://dev.twitter.com/web/intents
+            options.urlOptions = {
+                hashtags: attrs.hashtags,
+                via: attrs.via
+            };
             scope.ctrl = ctrl;
             ctrl.init(scope, element, options);
         }
